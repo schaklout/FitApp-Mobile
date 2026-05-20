@@ -1,0 +1,24 @@
+# Android built artifacts
+**/build/
+*.apk
+*.aar
+*.ap_
+*.dex
+*.class
+
+# IDE files
+.idea/
+*.iml
+.gradle/
+local.properties
+
+# Log files
+*.log
+
+# Mac files
+.DS_Store
+
+# Others
+captures/
+.externalNativeBuild
+.cxx

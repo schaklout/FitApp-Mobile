@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Theme -->
+    <style name="Base.Theme.LevelUp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Palette -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">@color/green_mid</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        
+        <!-- Transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/slide_in_right</item>
+        <item name="android:windowExitTransition">@transition/slide_out_left</item>
+        <item name="android:windowReturnTransition">@transition/slide_in_left</item>
+        <item name="android:windowReenterTransition">@transition/slide_out_right</item>
+
+        <!-- Button styles -->
+        <item name="materialButtonStyle">@style/Widget.LevelUp.Button</item>
+    </style>
+
+    <!-- Rounded Button Style -->
+    <style name="Widget.LevelUp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">@dimen/radius_pill</item>
+    </style>
+
+    <!-- Main App Theme -->
+    <style name="Theme.LevelUp" parent="Base.Theme.LevelUp" />
+    
+    <!-- Legacy compatibility -->
+    <style name="Theme.LevelUpLegacy" parent="Base.Theme.LevelUp" />
+</resources>

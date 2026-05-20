@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/darkBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar con flecha -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkBackground"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Editar perfil"
+        app:titleTextColor="@color/greenAccent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        android:padding="8dp" />
+
+    <!-- Contenido principal -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Card -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Nombre -->
+            <TextView
+                android:text="Nombre"
+                android:textColor="@color/textGray"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etNombre"
+                android:hint="Tu nombre"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/textGray"
+                android:background="@drawable/bg_input"
+                android:padding="12dp"
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Peso -->
+            <TextView
+                android:text="Peso (kg)"
+                android:textColor="@color/textGray"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etPeso"
+                android:hint="Ej: 70"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/textGray"
+                android:background="@drawable/bg_input"
+                android:padding="12dp"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Altura -->
+            <TextView
+                android:text="Altura (cm)"
+                android:textColor="@color/textGray"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etAltura"
+                android:hint="Ej: 175"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/textGray"
+                android:background="@drawable/bg_input"
+                android:padding="12dp"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- Botón guardar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardar"
+            android:text="Guardar cambios"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/greenAccent"
+            android:layout_marginTop="24dp"
+            android:padding="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="@dimen/radius_pill" />
+
+    </LinearLayout>
+
+</LinearLayout>

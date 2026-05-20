@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="surface">#0B0B0B</color>
+    <color name="surface_2">#111111</color>
+    <color name="surface_3">#1A1A1A</color>
+    <color name="border">#222222</color>
+    <color name="border_subtle">#181818</color>
+
+    <!-- Accent -->
+    <color name="green">#84F527</color>
+    <color name="green_dim">#1A84F527</color>    <!-- 10% alpha -->
+    <color name="green_mid">#4084F527</color>    <!-- 25% alpha -->
+    <color name="green_glow">#6084F527</color>   <!-- 38% alpha -->
+
+    <!-- Texto -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#888888</color>
+    <color name="text_muted">#444444</color>
+    <color name="text_disabled">#2A2A2A</color>
+
+    <!-- Compatibility Aliases (Mapped to new tokens) -->
+    <color name="primaryGreen">@color/green</color>
+    <color name="cardBackground">@color/surface</color>
+    <color name="buttonDark">@color/surface_2</color>
+    <color name="textLight">@color/text_primary</color>
+    <color name="background_dark">@color/black</color>
+    <color name="card_dark">@color/surface</color>
+    <color name="greenAccent">@color/green</color>
+    <color name="darkBackground">@color/black</color>
+    <color name="cardDark">@color/surface_2</color>
+    <color name="textGray">@color/text_secondary</color>
+    <color name="red_accent">#FF3B30</color>
+</resources>

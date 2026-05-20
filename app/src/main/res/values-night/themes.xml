@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Tema base para modo oscuro -->
+    <style name="Base.Theme.LevelUp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="android:navigationBarColor">@color/darkBackground</item>
+        <item name="android:windowBackground">@color/darkBackground</item>
+    </style>
+
+    <!-- Tema principal (modo oscuro) -->
+    <style name="Theme.LevelUp" parent="Base.Theme.LevelUp" />
+</resources>

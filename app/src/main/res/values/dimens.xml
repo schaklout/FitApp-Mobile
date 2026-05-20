@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="gap_micro">4dp</dimen>
+    <dimen name="gap_related">6dp</dimen>
+    <dimen name="padding_chip">8dp</dimen>
+    <dimen name="screen_padding_h">20dp</dimen>
+    <dimen name="gap_section_small">16dp</dimen>
+    <dimen name="card_padding_internal">16dp</dimen> <!-- Reduced from 24dp -->
+    <dimen name="gap_section">24dp</dimen> <!-- Reduced from 32dp -->
+    <dimen name="header_padding_v">32dp</dimen> <!-- Reduced from 48dp -->
+    <dimen name="gap_large">48dp</dimen>
+
+    <!-- Corner Radii -->
+    <dimen name="radius_small">6dp</dimen>
+    <dimen name="radius_medium">10dp</dimen>
+    <dimen name="radius_list_item">12dp</dimen>
+    <dimen name="radius_card_small">12dp</dimen>
+    <dimen name="radius_card_medium">16dp</dimen>
+    <dimen name="radius_card_large">24dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+</resources>

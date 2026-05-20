@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- Título de la rutina -->
+        <TextView
+            android:id="@+id/tvTituloEntrenamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Título de la Rutina"
+            android:textColor="@color/greenAccent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center" />
+
+        <!-- CONTENEDOR MULTIMEDIA -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/ivImagenEntrenamiento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <VideoView
+                android:id="@+id/videoRutina"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressLoader"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
+        <TextView
+            android:id="@+id/tvMetricasEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Métricas"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/tvDescripcionEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Descripción de la rutina"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <!-- Lista ejercicios -->
+        <LinearLayout
+            android:id="@+id/linearEjercicios"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- BOTÓN FINALIZAR -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFinalizarEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Finalizar Entrenamiento"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/greenAccent"
+            android:layout_marginBottom="8dp"
+            app:cornerRadius="@dimen/radius_pill"/>
+
+        <!-- NUEVO BOTÓN SALIR -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSalirEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salir"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#444444"
+            app:cornerRadius="@dimen/radius_pill"/>
+
+    </LinearLayout>
+
+</ScrollView>

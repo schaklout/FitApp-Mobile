@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="progreso_rangos">
+        <item>Últimos 7 días</item>
+        <item>Últimos 30 días</item>
+        <item>Todo</item>
+    </string-array>
+</resources>
