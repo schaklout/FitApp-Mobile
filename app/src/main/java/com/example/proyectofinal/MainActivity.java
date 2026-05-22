@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        InsetsHelper.enable(this);
         setContentView(R.layout.activity_main);
+        InsetsHelper.padBoth(findViewById(R.id.mainRoot));
 
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     String token2 = TokenManager.getToken(MainActivity.this);
                                     Toast.makeText(MainActivity.this, "Token guardado:\n" + token2, Toast.LENGTH_LONG).show();
 
-                                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, MainContainerActivity.class);
                                     startActivity(intent);
                                 });
                             }else {

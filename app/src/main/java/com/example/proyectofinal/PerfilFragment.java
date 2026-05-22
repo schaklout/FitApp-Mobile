@@ -3,19 +3,21 @@ package com.example.proyectofinal;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
@@ -27,91 +29,74 @@ import okhttp3.Callback;
 import okhttp3.Response;
 import java.io.IOException;
 
-public class PerfilActivity extends AppCompatActivity {
+public class PerfilFragment extends Fragment {
 
     private TextView saludoText, usernameText, miembroDesdeText, nivelText;
-    private TextView entrenamientosText, diasConsecutivosText, caloriasText, diasActivosText, rachaText, pesoText, alturaText;
+    private TextView caloriasText, diasActivosText, rachaText, pesoText, alturaText;
     private ImageView profileImage;
     private Button btnLogout;
     private TextView rutinasFinalizadasText;
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_perfil, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        saludoText = findViewById(R.id.saludoText);
-        usernameText = findViewById(R.id.usernameText);
-        miembroDesdeText = findViewById(R.id.miembroDesdeText);
-        nivelText = findViewById(R.id.nivelText);
+        InsetsHelper.padTop(view.findViewById(R.id.perfilScroll));
 
-        pesoText = findViewById(R.id.pesoText);
-        alturaText = findViewById(R.id.alturaText);
+        saludoText = view.findViewById(R.id.saludoText);
+        usernameText = view.findViewById(R.id.usernameText);
+        miembroDesdeText = view.findViewById(R.id.miembroDesdeText);
+        nivelText = view.findViewById(R.id.nivelText);
 
-        caloriasText = findViewById(R.id.caloriasText);
-        diasActivosText = findViewById(R.id.diasActivosText);
-        rachaText = findViewById(R.id.rachaText);
-        rutinasFinalizadasText = findViewById(R.id.rutinasFinalizadasText);
+        pesoText = view.findViewById(R.id.pesoText);
+        alturaText = view.findViewById(R.id.alturaText);
 
-        profileImage = findViewById(R.id.profile_image);
-        btnLogout = findViewById(R.id.btnLogout);
+        caloriasText = view.findViewById(R.id.caloriasText);
+        diasActivosText = view.findViewById(R.id.diasActivosText);
+        rachaText = view.findViewById(R.id.rachaText);
+        rutinasFinalizadasText = view.findViewById(R.id.rutinasFinalizadasText);
+
+        profileImage = view.findViewById(R.id.profile_image);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(v -> logout());
 
-        ImageView btnEditar = findViewById(R.id.btnEditProfile);
-        btnEditar.setOnClickListener(v -> startActivity(new Intent(this, EditProfileActivity.class)));
+        ImageView btnEditar = view.findViewById(R.id.btnEditProfile);
+        btnEditar.setOnClickListener(v -> startActivity(new Intent(requireActivity(), EditProfileActivity.class)));
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setSelectedItemId(R.id.nav_perfil);
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_inicio) {
-                startActivity(new Intent(this, DashboardActivity.class));
-                finish();
-                return true;
-            } else if (id == R.id.nav_rutinas) {
-                startActivity(new Intent(this, RutinasActivity.class));
-                finish();
-                return true;
-            } else if (id == R.id.nav_progreso) {
-                startActivity(new Intent(this, ProgresoActivity.class));
-                finish();
-                return true;
-            } else if (id == R.id.nav_perfil) {
-                return true;
-            }
-            return false;
-        });
-
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MyAppPrefs", requireActivity().MODE_PRIVATE);
         String userId = prefs.getString("user_id", null);
         String token = prefs.getString("token", null);
 
         if (userId != null) {
-
-            ApiService.getPerfil(this, new Callback() {
+            ApiService.getPerfil(requireActivity(), new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    runOnUiThread(() ->
-                            Toast.makeText(PerfilActivity.this, "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                    requireActivity().runOnUiThread(() ->
+                            Toast.makeText(requireActivity(), "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show()
                     );
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.body() == null) {
-                        runOnUiThread(() ->
-                                Toast.makeText(PerfilActivity.this, "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show()
+                        requireActivity().runOnUiThread(() ->
+                                Toast.makeText(requireActivity(), "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show()
                         );
                         return;
                     }
 
                     String body = response.body().string();
-                    runOnUiThread(() -> {
+                    requireActivity().runOnUiThread(() -> {
                         try {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(PerfilActivity.this, "Error al obtener datos: " + response.code(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(requireActivity(), "Error al obtener datos: " + response.code(), Toast.LENGTH_LONG).show();
                                 mostrarUsuarioVacio();
                                 return;
                             }
@@ -121,7 +106,7 @@ public class PerfilActivity extends AppCompatActivity {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(PerfilActivity.this, "Error al parsear perfil", Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireActivity(), "Error al parsear perfil", Toast.LENGTH_LONG).show();
                             mostrarUsuarioVacio();
                         }
                     });
@@ -138,15 +123,15 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("MyPrefs", requireActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
 
-        Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        requireActivity().finish();
     }
 
     private void mostrarUsuarioVacio() {
@@ -154,65 +139,12 @@ public class PerfilActivity extends AppCompatActivity {
         usernameText.setText("-");
         miembroDesdeText.setText("-");
         nivelText.setText("-");
-        entrenamientosText.setText("0");
-        diasConsecutivosText.setText("0");
         caloriasText.setText("0");
         diasActivosText.setText("0");
         rachaText.setText("Racha: 0 días 🔥");
     }
 
-    private void mostrarDatosUsuario1(@NonNull JSONObject usuario) {
-
-        String nombre = usuario.optString("nombre", "Usuario");
-        String email = usuario.optString("email", "-");
-        String fecha = usuario.optString("fecha_creacion", "-");
-
-        saludoText.setText("¡Hola, " + nombre + "!");
-        usernameText.setText(email);
-        miembroDesdeText.setText("Miembro desde " + fecha.substring(0, 10));
-        nivelText.setText(usuario.optString("nivel", "-"));
-
-        entrenamientosText.setText(String.valueOf(usuario.optInt("entrenamientos", 0)));
-        diasConsecutivosText.setText(String.valueOf(usuario.optInt("dias_consecutivos", 0)));
-    }
-
-    private void mostrarDatosUsuario2(@NonNull JSONObject usuario) {
-
-
-        String nombre = usuario.optString("nombre", "Usuario");
-        String email = usuario.optString("email", "-");
-
-        String fecha = usuario.optString("fecha_creacion", "-");
-        miembroDesdeText.setText("Miembro desde " + fecha.substring(0, 10));
-
-        saludoText.setText("¡Hola, " + nombre + "!");
-        usernameText.setText(email);
-        nivelText.setText(usuario.optString("nivel", "-"));
-
-
-        int entrenamientos = usuario.optInt("entrenamientos", -1);
-        int diasConsec = usuario.optInt("dias_consecutivos", -1);
-
-
-        if (entrenamientos == -1) {
-            SharedPreferences prefs = getSharedPreferences("ActivityPrefs", MODE_PRIVATE);
-            entrenamientos = prefs.getInt("dias_activos", 0);
-        }
-        if (diasConsec == -1) {
-            SharedPreferences prefs = getSharedPreferences("ActivityPrefs", MODE_PRIVATE);
-            diasConsec = prefs.getInt("racha", 0);
-        }
-
-        entrenamientosText.setText(String.valueOf(entrenamientos));
-        diasConsecutivosText.setText(String.valueOf(diasConsec));
-
-
-        caloriasText.setText(String.valueOf(usuario.optInt("calorias_totales", 0)));
-
-    }
-
     private void mostrarDatosUsuario(@NonNull JSONObject usuario) {
-
         String nombre = usuario.optString("nombre", "Usuario");
         String email = usuario.optString("email", "-");
 
@@ -222,13 +154,13 @@ public class PerfilActivity extends AppCompatActivity {
         saludoText.setText("¡Hola, " + nombre + "!");
         usernameText.setText(email);
         nivelText.setText(usuario.optString("nivel", "-"));
-
 
         pesoText.setText(usuario.optString("peso", "-"));
         alturaText.setText(usuario.optString("altura", "-"));
 
         caloriasText.setText(String.valueOf(usuario.optInt("calorias_totales", 0)));
     }
+
     private void cargarCalorias(String token) {
         String url = "https://iatic.es/ifc302/g1/fitapp/api.php/dashboard";
 
@@ -250,11 +182,11 @@ public class PerfilActivity extends AppCompatActivity {
             }
         };
 
-        Volley.newRequestQueue(this).add(request);
+        Volley.newRequestQueue(requireActivity()).add(request);
     }
 
     private void actualizarDiasActivos() {
-        SharedPreferences prefs = getSharedPreferences("ActivityPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getSharedPreferences("ActivityPrefs", requireActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
         String lastActive = prefs.getString("last_active_day", "");
@@ -282,18 +214,16 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void cargarRutinasFinalizadas() {
-
-        ApiService.getRutinas(this, new Callback() {
+        ApiService.getRutinas(requireActivity(), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                runOnUiThread(() ->
+                requireActivity().runOnUiThread(() ->
                         rutinasFinalizadasText.setText("Rutinas finalizadas: 0")
                 );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 if (response.body() == null) return;
 
                 try {
@@ -311,7 +241,7 @@ public class PerfilActivity extends AppCompatActivity {
 
                     int finalTotal = totalFinalizadas;
 
-                    runOnUiThread(() ->
+                    requireActivity().runOnUiThread(() ->
                             rutinasFinalizadasText.setText(
                                     "Rutinas finalizadas: " + finalTotal
                             )
@@ -323,5 +253,4 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
     }
-
 }

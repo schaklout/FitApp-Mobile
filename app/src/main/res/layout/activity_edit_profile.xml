@@ -20,6 +20,7 @@
 
     <!-- Contenido principal -->
     <LinearLayout
+        android:id="@+id/editContentLayout"
         android:orientation="vertical"
         android:padding="16dp"
         android:layout_width="match_parent"

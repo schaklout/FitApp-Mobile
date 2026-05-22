@@ -9,9 +9,9 @@
     tools:context=".PerfilActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/perfilScroll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
@@ -376,17 +376,4 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Bottom Nav -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/surface"
-        app:itemIconTint="@color/nav_icon_color"
-        app:itemTextColor="@color/nav_icon_color"
-        app:itemPaddingTop="10dp"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"/>
-
 </LinearLayout>

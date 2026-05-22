@@ -33,7 +33,10 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        InsetsHelper.enable(this);
         setContentView(R.layout.activity_edit_profile);
+        InsetsHelper.padTop(findViewById(R.id.toolbar));
+        InsetsHelper.padBoth(findViewById(R.id.editContentLayout));
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -48,7 +48,9 @@ public class EntrenamientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        InsetsHelper.enable(this);
         setContentView(R.layout.activity_entrenamiento);
+        InsetsHelper.padBoth(findViewById(R.id.entrenoScroll));
 
         tvTituloEntrenamiento = findViewById(R.id.tvTituloEntrenamiento);
         tvDescripcionEntrenamiento = findViewById(R.id.tvDescripcionEntrenamiento);
