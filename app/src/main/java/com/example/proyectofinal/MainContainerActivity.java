@@ -1,11 +1,14 @@
 package com.example.proyectofinal;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainContainerActivity extends AppCompatActivity {
@@ -66,6 +69,22 @@ public class MainContainerActivity extends AppCompatActivity {
             }
 
             return true;
+        });
+
+        ImageView btnNotif = findViewById(R.id.btnNotificaciones);
+
+        BadgeDrawable badge = BadgeDrawable.create(this);
+        badge.setNumber(3);
+        badge.setVisible(true);
+        BadgeUtils.attachBadgeDrawable(badge, btnNotif);
+
+        btnNotif.setOnClickListener(v -> {
+            NotificationsSheet sheet = (NotificationsSheet) getSupportFragmentManager().findFragmentByTag("notifications");
+            if (sheet != null) {
+                sheet.dismiss();
+            } else {
+                new NotificationsSheet().show(getSupportFragmentManager(), "notifications");
+            }
         });
 
         if (savedInstanceState == null) {

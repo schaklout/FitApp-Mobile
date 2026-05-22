@@ -22,16 +22,21 @@
             android:src="@drawable/levelup_logo"
             android:scaleType="fitCenter" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="LevelUp"
-            android:textColor="@color/green"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/bebas_neue"
-            android:letterSpacing="0.04" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btnNotificaciones"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_notifications"
+            android:scaleType="fitCenter"
+            app:tint="@color/green"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
