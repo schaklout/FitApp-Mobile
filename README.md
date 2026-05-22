@@ -37,11 +37,10 @@ LevelUp is a professional Android mobile application designed to function as a p
 
 ## 📸 Screenshots
 
-*(Add your screenshots here later)*
-
+soon...
 ## 📄 License
 
 This project is for educational purposes as part of a final project.
 
 ---
-**Developed by:** [Your Name]
+**Developed by:** Samar Chaklout Chaklout
