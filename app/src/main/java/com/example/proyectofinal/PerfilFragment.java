@@ -33,8 +33,6 @@ public class PerfilFragment extends Fragment {
 
     private TextView saludoText, usernameText, miembroDesdeText, nivelText;
     private TextView caloriasText, diasActivosText, rachaText, pesoText, alturaText;
-    private ImageView profileImage;
-    private Button btnLogout;
     private TextView rutinasFinalizadasText;
 
     @Nullable
@@ -51,22 +49,16 @@ public class PerfilFragment extends Fragment {
         usernameText = view.findViewById(R.id.usernameText);
         miembroDesdeText = view.findViewById(R.id.miembroDesdeText);
         nivelText = view.findViewById(R.id.nivelText);
-
         pesoText = view.findViewById(R.id.pesoText);
         alturaText = view.findViewById(R.id.alturaText);
-
         caloriasText = view.findViewById(R.id.caloriasText);
         diasActivosText = view.findViewById(R.id.diasActivosText);
         rachaText = view.findViewById(R.id.rachaText);
         rutinasFinalizadasText = view.findViewById(R.id.rutinasFinalizadasText);
 
-        profileImage = view.findViewById(R.id.profile_image);
-        btnLogout = view.findViewById(R.id.btnLogout);
-
-        btnLogout.setOnClickListener(v -> logout());
-
-        ImageView btnEditar = view.findViewById(R.id.btnEditProfile);
-        btnEditar.setOnClickListener(v -> startActivity(new Intent(requireActivity(), EditProfileActivity.class)));
+        view.findViewById(R.id.btnLogout).setOnClickListener(v -> logout());
+        view.findViewById(R.id.btnEditProfile).setOnClickListener(v ->
+                startActivity(new Intent(requireActivity(), EditProfileActivity.class)));
 
         SharedPreferences prefs = requireActivity().getSharedPreferences("MyAppPrefs", requireActivity().MODE_PRIVATE);
         String userId = prefs.getString("user_id", null);
@@ -77,19 +69,16 @@ public class PerfilFragment extends Fragment {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     requireActivity().runOnUiThread(() ->
-                            Toast.makeText(requireActivity(), "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                    );
+                            Toast.makeText(requireActivity(), "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show());
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.body() == null) {
                         requireActivity().runOnUiThread(() ->
-                                Toast.makeText(requireActivity(), "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show()
-                        );
+                                Toast.makeText(requireActivity(), "Respuesta vacía del servidor", Toast.LENGTH_SHORT).show());
                         return;
                     }
-
                     String body = response.body().string();
                     requireActivity().runOnUiThread(() -> {
                         try {
@@ -98,10 +87,7 @@ public class PerfilFragment extends Fragment {
                                 mostrarUsuarioVacio();
                                 return;
                             }
-
-                            JSONObject usuario = new JSONObject(body);
-                            mostrarDatosUsuario(usuario);
-
+                            mostrarDatosUsuario(new JSONObject(body));
                         } catch (Exception e) {
                             e.printStackTrace();
                             Toast.makeText(requireActivity(), "Error al parsear perfil", Toast.LENGTH_LONG).show();
@@ -114,7 +100,6 @@ public class PerfilFragment extends Fragment {
             if (token != null) cargarCalorias(token);
             actualizarDiasActivos();
             cargarRutinasFinalizadas();
-
         } else {
             mostrarUsuarioVacio();
         }
@@ -122,9 +107,7 @@ public class PerfilFragment extends Fragment {
 
     private void logout() {
         SharedPreferences prefs = requireActivity().getSharedPreferences("MyPrefs", requireActivity().MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
-        editor.apply();
+        prefs.edit().clear().apply();
 
         Intent intent = new Intent(requireActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -133,43 +116,38 @@ public class PerfilFragment extends Fragment {
     }
 
     private void mostrarUsuarioVacio() {
-        saludoText.setText("¡Hola!");
+        saludoText.setText("Usuario");
         usernameText.setText("-");
         miembroDesdeText.setText("-");
         nivelText.setText("-");
+        pesoText.setText("0");
+        alturaText.setText("0");
         caloriasText.setText("0");
         diasActivosText.setText("0");
-        rachaText.setText("Racha: 0 días 🔥");
+        rachaText.setText("0 días");
+        rutinasFinalizadasText.setText("0");
     }
 
     private void mostrarDatosUsuario(@NonNull JSONObject usuario) {
         String nombre = usuario.optString("nombre", "Usuario");
         String email = usuario.optString("email", "-");
-
         String fecha = usuario.optString("fecha_creacion", "-");
-        miembroDesdeText.setText("Miembro desde " + fecha.substring(0, 10));
 
-        saludoText.setText("¡Hola, " + nombre + "!");
+        saludoText.setText(nombre);
         usernameText.setText(email);
-        nivelText.setText(usuario.optString("nivel", "-"));
+        miembroDesdeText.setText("Miembro desde " + fecha.substring(0, 10));
+        nivelText.setText(usuario.optString("nivel", "Intermedio").toUpperCase());
 
-        pesoText.setText(usuario.optString("peso", "-"));
-        alturaText.setText(usuario.optString("altura", "-"));
-
+        pesoText.setText(usuario.optString("peso", "0"));
+        alturaText.setText(usuario.optString("altura", "0"));
         caloriasText.setText(String.valueOf(usuario.optInt("calorias_totales", 0)));
     }
 
     private void cargarCalorias(String token) {
         String url = "https://iatic.es/ifc302/g1/fitapp/api.php/dashboard";
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                response -> {
-                    int calorias = response.optInt("calorias_quemadas", 0);
-                    caloriasText.setText(String.valueOf(calorias));
-                },
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> caloriasText.setText(String.valueOf(response.optInt("calorias_quemadas", 0))),
                 error -> caloriasText.setText("0")
         ) {
             @Override
@@ -190,16 +168,12 @@ public class PerfilFragment extends Fragment {
         String lastActive = prefs.getString("last_active_day", "");
         int diasActivos = prefs.getInt("dias_activos", 0);
         int racha = prefs.getInt("racha", 0);
-
         String hoy = java.time.LocalDate.now().toString();
 
         if (!lastActive.equals(hoy)) {
             diasActivos++;
-            if (lastActive.equals(java.time.LocalDate.now().minusDays(1).toString())) {
-                racha++;
-            } else {
-                racha = 1;
-            }
+            if (lastActive.equals(java.time.LocalDate.now().minusDays(1).toString())) racha++;
+            else racha = 1;
 
             editor.putString("last_active_day", hoy);
             editor.putInt("dias_activos", diasActivos);
@@ -208,43 +182,27 @@ public class PerfilFragment extends Fragment {
         }
 
         diasActivosText.setText(String.valueOf(diasActivos));
-        rachaText.setText("Racha: " + racha + " días 🔥");
+        rachaText.setText(racha + " días");
     }
 
     private void cargarRutinasFinalizadas() {
         ApiService.getRutinas(requireActivity(), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                requireActivity().runOnUiThread(() ->
-                        rutinasFinalizadasText.setText("Rutinas finalizadas: 0")
-                );
+                requireActivity().runOnUiThread(() -> rutinasFinalizadasText.setText("0"));
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.body() == null) return;
-
                 try {
-                    String body = response.body().string();
-                    org.json.JSONArray array = new org.json.JSONArray(body);
-
-                    int totalFinalizadas = 0;
-
+                    org.json.JSONArray array = new org.json.JSONArray(response.body().string());
+                    int total = 0;
                     for (int i = 0; i < array.length(); i++) {
-                        org.json.JSONObject rutina = array.getJSONObject(i);
-                        if (rutina.optInt("completada", 0) == 1) {
-                            totalFinalizadas++;
-                        }
+                        if (array.getJSONObject(i).optInt("completada", 0) == 1) total++;
                     }
-
-                    int finalTotal = totalFinalizadas;
-
-                    requireActivity().runOnUiThread(() ->
-                            rutinasFinalizadasText.setText(
-                                    "Rutinas finalizadas: " + finalTotal
-                            )
-                    );
-
+                    int finalTotal = total;
+                    requireActivity().runOnUiThread(() -> rutinasFinalizadasText.setText(String.valueOf(finalTotal)));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

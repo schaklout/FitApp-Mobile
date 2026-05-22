@@ -1,379 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilActivity">
+    android:background="@color/black">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/perfilScroll"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="24dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/screen_padding_h"
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PERFIL"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:fontFamily="@font/bebas_neue"
+            android:letterSpacing="0.04"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp" />
+
+        <!-- Profile Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/border"
+            app:strokeWidth="0.5dp"
+            android:layout_marginBottom="16dp">
 
-            <!-- Header -->
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingVertical="@dimen/header_padding_v">
-
-                <TextView
-                    android:id="@+id/saludoText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MI PERFIL"
-                    style="@style/TextDisplay.Large"
-                    android:textColor="@color/green" />
-
-                <TextView
-                    android:id="@+id/subText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CONFIGURACIÓN Y LOGROS"
-                    style="@style/TextLabel"
-                    android:textColor="@color/text_secondary" />
-            </LinearLayout>
-
-            <!-- Profile Info Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/surface"
-                app:cardCornerRadius="@dimen/radius_card_medium"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/border"
-                app:strokeWidth="1dp"
-                android:layout_marginBottom="@dimen/gap_section">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:padding="@dimen/card_padding_internal"
+                    android:padding="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/ic_user"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        app:strokeColor="@color/green"
+                        app:strokeWidth="2.5dp"
+                        android:padding="3dp" />
+
+                    <TextView
+                        android:id="@+id/saludoText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Usuario"
+                        android:textColor="@color/text_primary"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/bebas_neue"
+                        android:letterSpacing="0.02" />
+
+                    <TextView
+                        android:id="@+id/usernameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="email@email.com"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/barlow" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/nivelText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="INTERMEDIO"
+                            android:textColor="@color/green"
+                            android:textSize="10sp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:letterSpacing="0.08"
+                            android:background="@drawable/bg_level"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp" />
+
+                        <TextView
+                            android:id="@+id/miembroDesdeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:text="Miembro desde 2025"
+                            android:textColor="@color/text_muted"
+                            android:textSize="10sp"
+                            android:fontFamily="@font/barlow" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border_subtle"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Body stats row -->
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/profile_image"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_user"
-                            android:scaleType="centerCrop"
-                            app:shapeAppearanceOverlay="@style/CircleImageView"
-                            app:strokeColor="@color/green"
-                            app:strokeWidth="2dp"
-                            android:padding="2dp" />
+                        <TextView
+                            android:id="@+id/pesoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/green"
+                            android:textSize="26sp"
+                            android:fontFamily="@font/bebas_neue" />
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/usernameText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="USUARIO"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/white" />
-
-                            <TextView
-                                android:id="@+id/miembroDesdeText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="MIEMBRO DESDE 2025"
-                                style="@style/TextBody.Small"
-                                android:textColor="@color/text_muted" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/nivelText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="INTERMEDIO"
-                                style="@style/Widget.MaterialComponents.Chip.Action"
-                                app:chipBackgroundColor="@color/green_dim"
-                                android:textColor="@color/green"
-                                android:layout_marginTop="4dp"
-                                app:chipCornerRadius="@dimen/radius_small"
-                                app:chipStrokeWidth="0dp" />
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/btnEditProfile"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/ic_edit"
-                            app:tint="@color/green"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:background="?attr/selectableItemBackgroundBorderless" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PESO (KG)"
+                            android:textColor="@color/text_muted"
+                            android:textSize="10sp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:letterSpacing="0.06" />
                     </LinearLayout>
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/border_subtle"
-                        android:layout_marginVertical="20dp" />
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="@color/border_subtle" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/alturaText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/green"
+                            android:textSize="26sp"
+                            android:fontFamily="@font/bebas_neue" />
 
-                            <TextView
-                                android:id="@+id/pesoText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PESO (KG)"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/alturaText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ALTURA (M)"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ALTURA (M)"
+                            android:textColor="@color/text_muted"
+                            android:textSize="10sp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:letterSpacing="0.06" />
                     </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Edit button top-right -->
+            <LinearLayout
+                android:id="@+id/btnEditProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|top"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:background="@drawable/bg_level"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_edit"
+                    app:tint="@color/green"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+        <!-- Stats Grid 2x2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_marginBottom="8dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALORÍAS"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/caloriasText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/green"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Stats Section -->
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="ESTADÍSTICAS"
-                style="@style/TextLabel"
-                android:layout_marginBottom="@dimen/gap_related" />
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
 
-            <!-- Stats Grid -->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!-- Calories Card -->
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="@dimen/radius_card_small"
-                    app:cardElevation="0dp"
-                    app:strokeColor="@color/border"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="@dimen/gap_related">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RUTINAS"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/ic_fitness"
-                            app:tint="@color/green"
-                            android:layout_marginEnd="16dp" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="CALORÍAS TOTALES"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/caloriasText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Small"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Active Days Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="@dimen/radius_card_small"
-                    app:cardElevation="0dp"
-                    app:strokeColor="@color/border"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="@dimen/gap_related">
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/ic_calender"
-                            app:tint="@color/green"
-                            android:layout_marginEnd="16dp" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="DÍAS ACTIVOS"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/diasActivosText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Small"
-                                android:textColor="@color/white" />
-
-                            <TextView
-                                android:id="@+id/rachaText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RACHA: 0 DÍAS 🔥"
-                                style="@style/TextBody.Small"
-                                android:textColor="@color/green"
-                                android:layout_marginTop="2dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Routines Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="@dimen/radius_card_small"
-                    app:cardElevation="0dp"
-                    app:strokeColor="@color/border"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="@dimen/gap_section">
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/ic_fitness"
-                            app:tint="@color/green"
-                            android:layout_marginEnd="16dp" />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RUTINAS FINALIZADAS"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/rutinasFinalizadasText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Small"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
-
-            <!-- Logout Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="CERRAR SESIÓN"
-                android:textColor="@color/white"
-                
-                android:textStyle="bold"
-                android:letterSpacing="0.12"
-                app:backgroundTint="@color/black"
-                app:strokeColor="@color/red_accent"
-                app:strokeWidth="1dp"
-                app:cornerRadius="@dimen/radius_pill"
-                android:layout_marginBottom="@dimen/gap_section"
-                app:icon="@drawable/ic_logout"
-                app:iconGravity="textStart"
-                app:iconTint="@color/red_accent" />
-
+                    <TextView
+                        android:id="@+id/rutinasFinalizadasText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+        <!-- Second row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DÍAS ACTIVOS"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/diasActivosText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RACHA"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/rachaText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0 días"
+                        android:textColor="@color/green"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Logout -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Cerrar sesión"
+            android:textColor="@color/red_accent"
+            android:textAllCaps="true"
+            android:letterSpacing="0.08"
+            android:textSize="13sp"
+            android:fontFamily="@font/barlow_bold"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeColor="@color/red_accent"
+            app:strokeWidth="1dp"
+            app:cornerRadius="@dimen/radius_pill"
+            app:icon="@drawable/ic_logout"
+            app:iconTint="@color/red_accent"
+            app:iconGravity="textStart" />
+
+    </LinearLayout>
+</ScrollView>

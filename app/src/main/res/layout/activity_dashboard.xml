@@ -1,266 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".DashboardActivity">
+    android:background="@color/black">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/dashboardScroll"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="24dp">
 
+        <!-- Header -->
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/screen_padding_h">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp">
 
-            <!-- Header Section -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡HOLA!"
+                android:textColor="@color/text_primary"
+                android:textSize="28sp"
+                android:fontFamily="@font/bebas_neue"
+                android:letterSpacing="0.04" />
+
+            <TextView
+                android:id="@+id/tvSubGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listo para entrenar"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:fontFamily="@font/barlow" />
+        </LinearLayout>
+
+        <!-- Motivation Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#3384F527"
+            app:strokeWidth="1.5dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvMotivation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingVertical="@dimen/header_padding_v">
+                android:padding="20dp"
+                android:text="La constancia vence al talento cuando el talento no es constante."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:fontFamily="@font/barlow"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:lineSpacingMultiplier="1.3" />
+        </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/tvGreeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="¡HOLA!"
-                    style="@style/TextDisplay.Large"
-                    android:textColor="@color/green" />
+        <!-- Carousel -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/imageCarousel"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginBottom="4dp"
+            android:clipToPadding="false"
+            android:clipChildren="false" />
 
-                <TextView
-                    android:id="@+id/tvSubGreeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LISTO PARA ENTRENAR"
-                    style="@style/TextLabel"
-                    android:textColor="@color/text_secondary" />
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dotsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp" />
 
-            <!-- Motivation Quote -->
+        <!-- Stats Grid 2x2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp">
+
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/surface_2"
-                app:cardCornerRadius="@dimen/radius_card_small"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                android:layout_marginBottom="@dimen/gap_section">
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
 
-                <TextView
-                    android:id="@+id/tvMotivation"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/card_padding_internal"
-                    android:text="“La constancia vence al talento cuando el talento no es constante.”"
-                    style="@style/TextBody"
-                    android:gravity="center"
-                    android:textStyle="italic" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALORÍAS"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/tvCalorias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/green"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Carousel Section -->
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="DESTACADO"
-                style="@style/TextLabel"
-                android:layout_marginBottom="@dimen/gap_related" />
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/imageCarousel"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="@dimen/gap_micro"
-                android:clipToPadding="false"
-                android:clipChildren="false" />
-
-            <LinearLayout
-                android:id="@+id/dotsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/gap_section" />
-
-            <!-- Progress Header -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TU PROGRESO HOY"
-                style="@style/TextLabel"
-                android:layout_marginBottom="@dimen/gap_related" />
-
-            <!-- Progress Cards Grid-like -->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!-- Row 1: Calories & Weight -->
                 <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
+                    android:layout_height="wrap_content">
 
-                    <!-- Calories Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/gap_micro"
-                        android:layout_marginBottom="@dimen/gap_related"
-                        app:cardBackgroundColor="@color/surface"
-                        app:cardCornerRadius="@dimen/radius_card_medium"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/border"
-                        app:strokeWidth="1dp">
+                        android:text="PESO"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/card_padding_internal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="CALORÍAS"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/tvCalorias"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Weight Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tvPesoActual"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="@dimen/gap_micro"
-                        android:layout_marginBottom="@dimen/gap_related"
-                        app:cardBackgroundColor="@color/surface"
-                        app:cardCornerRadius="@dimen/radius_card_medium"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/border"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/card_padding_internal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PESO"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/tvPesoActual"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0 kg"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        android:layout_marginTop="4dp"
+                        android:text="0 kg"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
                 </LinearLayout>
-
-                <!-- Row 2: IMC & Routines -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
-
-                    <!-- IMC Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/gap_micro"
-                        android:layout_marginBottom="@dimen/gap_section"
-                        app:cardBackgroundColor="@color/surface"
-                        app:cardCornerRadius="@dimen/radius_card_medium"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/border"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/card_padding_internal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="IMC"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/tvImc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Routines Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="@dimen/gap_micro"
-                        android:layout_marginBottom="@dimen/gap_section"
-                        app:cardBackgroundColor="@color/surface"
-                        app:cardCornerRadius="@dimen/radius_card_medium"
-                        app:cardElevation="0dp"
-                        app:strokeColor="@color/border"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/card_padding_internal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="RUTINAS"
-                                style="@style/TextLabel"
-                                android:textColor="@color/text_muted" />
-
-                            <TextView
-                                android:id="@+id/tvRutinas"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                style="@style/TextDisplay.Medium"
-                                android:textColor="@color/green" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMC"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/tvImc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/green"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#3384F527"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ENTRENOS"
+                        android:textColor="@color/text_muted"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.08" />
+
+                    <TextView
+                        android:id="@+id/tvRutinas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="0"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/bebas_neue" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
