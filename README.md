@@ -1,8 +1,8 @@
-# LevelUp 🏋️‍♂️
+# LevelUp 
 
 LevelUp is a professional Android mobile application designed to function as a personal trainer. It helps users stay motivated, track their consistency, and achieve their fitness goals through a clean and intuitive interface.
 
-## 📱 Features
+##  Features
 
 - **Dashboard:** Interactive home screen with inspiring image carousels and daily progress tracking.
 - **Workout Tracking:** Log your exercises and monitor your consistency.
@@ -10,7 +10,7 @@ LevelUp is a professional Android mobile application designed to function as a p
 - **Profile Management:** Personalized user profiles with progress monitoring.
 - **API Integration:** Data synchronization using Retrofit for a secure and updated experience.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Platform:** Android
 - **Language:** Java
@@ -18,7 +18,7 @@ LevelUp is a professional Android mobile application designed to function as a p
 - **Design:** XML layouts with a focus on modern UX/UI.
 - **Dependency Management:** Gradle (with Version Catalog).
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -35,13 +35,13 @@ LevelUp is a professional Android mobile application designed to function as a p
 3. Wait for Gradle to sync dependencies.
 4. Run the app on an emulator or a physical device.
 
-## 📸 Screenshots
+##  Screenshots
 
-*(Add your screenshots here later)*
+soon...
 
-## 📄 License
+##  License
 
 This project is for educational purposes as part of a final project.
 
 ---
-**Developed by:** [Your Name]
+**Developed by:** Samar Chaklout Chaklout
