@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
@@ -66,12 +67,12 @@ public class RutinasFragment extends Fragment {
         if (tvTitulo != null) {
             String hoy = obtenerDiaHoy();
             tvTitulo.setText("Rutinas - " + hoy);
-            tvTitulo.setOnClickListener(v -> new CalendarRutinasDialog(requireActivity()).mostrar());
+            tvTitulo.setOnClickListener(v -> new CalendarSheet().show(getChildFragmentManager(), "calendar"));
         }
 
         Button btnCalendario = view.findViewById(R.id.btnCalendario);
         if (btnCalendario != null) {
-            btnCalendario.setOnClickListener(v -> new CalendarRutinasDialog(requireActivity()).mostrar());
+            btnCalendario.setOnClickListener(v -> new CalendarSheet().show(getChildFragmentManager(), "calendar"));
         }
 
         cargarRutinas();
@@ -117,7 +118,7 @@ public class RutinasFragment extends Fragment {
                                     int vecesPorSemana = rutina.optInt("veces_por_semana", 0);
                                     int diaSemana = rutina.optInt("dia_semana", -1);
 
-                                    LinearLayout card = crearCardRutina(nombre, descripcion, nivel, rutinaUsuarioId,
+                                    View card = crearCardRutina(nombre, descripcion, nivel, rutinaUsuarioId,
                                             repeticiones, vecesPorSemana, diaSemana);
                                     linearRutinasDelDia.addView(card);
                                     hayRutinas = true;
@@ -139,84 +140,121 @@ public class RutinasFragment extends Fragment {
         });
     }
 
-    private LinearLayout crearCardRutina(String nombre, String descripcion, String nivel, int rutinaUsuarioId,
+    private View crearCardRutina(String nombre, String descripcion, String nivel, int rutinaUsuarioId,
                                          int repeticiones, int vecesPorSemana, int diaSemana) {
-        LinearLayout card = new LinearLayout(requireContext());
-        card.setOrientation(LinearLayout.VERTICAL);
-        card.setPadding(40, 40, 40, 40);
-        card.setBackgroundColor(Color.parseColor("#1E1E2E"));
-        card.setElevation(8f);
+        com.google.android.material.card.MaterialCardView card = new com.google.android.material.card.MaterialCardView(requireContext());
+        card.setCardBackgroundColor(Color.parseColor("#0D0D0D"));
+        card.setStrokeColor(Color.parseColor("#3384F527"));
+        card.setStrokeWidth(2);
+        card.setRadius(24);
+        card.setCardElevation(4f);
         card.setClipToPadding(false);
+        card.setContentPadding(24, 24, 24, 24);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(0, 0, 0, 32);
+        params.setMargins(0, 0, 0, 20);
         card.setLayoutParams(params);
 
-        TextView tvNombre = new TextView(requireContext());
-        tvNombre.setText(nombre);
-        tvNombre.setTextColor(Color.WHITE);
-        tvNombre.setTextSize(18);
-        tvNombre.setTypeface(null, Typeface.BOLD);
+        LinearLayout content = new LinearLayout(requireContext());
+        content.setOrientation(LinearLayout.VERTICAL);
 
-        TextView tvDescripcion = new TextView(requireContext());
-        tvDescripcion.setText(descripcion);
-        tvDescripcion.setTextColor(Color.parseColor("#AAAAAA"));
-        tvDescripcion.setTextSize(14);
-        tvDescripcion.setPadding(0, 8, 0, 8);
+        // Nivel chip
+        LinearLayout topRow = new LinearLayout(requireContext());
+        topRow.setOrientation(LinearLayout.HORIZONTAL);
+        topRow.setGravity(android.view.Gravity.CENTER_VERTICAL);
 
         TextView tvNivel = new TextView(requireContext());
-        tvNivel.setText("Nivel: " + nivel);
-        tvNivel.setTextColor(Color.parseColor("#9ED700"));
-        tvNivel.setTextSize(14);
-
-        card.addView(tvNombre);
-        card.addView(tvDescripcion);
-        card.addView(tvNivel);
-
-        LinearLayout metaLine = new LinearLayout(requireContext());
-        metaLine.setOrientation(LinearLayout.HORIZONTAL);
-        metaLine.setPadding(0, 8, 0, 8);
-
-        if (repeticiones > 0) {
-            TextView tvReps = new TextView(requireContext());
-            tvReps.setText(repeticiones + " reps");
-            tvReps.setTextColor(Color.parseColor("#CCCCCC"));
-            tvReps.setPadding(0, 0, 16, 0);
-            metaLine.addView(tvReps);
-        }
-
-        if (vecesPorSemana > 0) {
-            TextView tvVeces = new TextView(requireContext());
-            tvVeces.setText(vecesPorSemana + "x/sem");
-            tvVeces.setTextColor(Color.parseColor("#CCCCCC"));
-            tvVeces.setPadding(0, 0, 16, 0);
-            metaLine.addView(tvVeces);
-        }
+        tvNivel.setText(nivel.toUpperCase());
+        tvNivel.setTextColor(Color.parseColor("#84F527"));
+        tvNivel.setTextSize(10);
+        tvNivel.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.barlow_bold));
+        tvNivel.setBackgroundResource(R.drawable.bg_level);
+        tvNivel.setPadding(12, 4, 12, 4);
+        topRow.addView(tvNivel);
 
         if (diaSemana >= 0 && diaSemana <= 6) {
             String[] diasMap = {"Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"};
             TextView tvDia = new TextView(requireContext());
-            tvDia.setText("📅 " + diasMap[diaSemana]);
-            tvDia.setTextColor(Color.parseColor("#AAAAAA"));
-            metaLine.addView(tvDia);
+            tvDia.setText(diasMap[diaSemana]);
+            tvDia.setTextColor(Color.parseColor("#888888"));
+            tvDia.setTextSize(11);
+            tvDia.setPadding(16, 0, 0, 0);
+            topRow.addView(tvDia);
         }
 
-        if (metaLine.getChildCount() > 0) card.addView(metaLine);
+        content.addView(topRow);
 
-        Button btnEntrenar = new Button(requireContext());
-        btnEntrenar.setText("Entrenar");
-        btnEntrenar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#9ED700")));
+        // Titulo
+        TextView tvNombre = new TextView(requireContext());
+        tvNombre.setText(nombre);
+        tvNombre.setTextColor(Color.WHITE);
+        tvNombre.setTextSize(22);
+        tvNombre.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.bebas_neue));
+        tvNombre.setPadding(0, 12, 0, 0);
+        content.addView(tvNombre);
+
+        // Descripcion
+        TextView tvDescripcion = new TextView(requireContext());
+        tvDescripcion.setText(descripcion);
+        tvDescripcion.setTextColor(Color.parseColor("#999999"));
+        tvDescripcion.setTextSize(13);
+        tvDescripcion.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.barlow));
+        tvDescripcion.setPadding(0, 6, 0, 0);
+        tvDescripcion.setLineSpacing(4, 1);
+        content.addView(tvDescripcion);
+
+        // Metricas
+        if (repeticiones > 0 || vecesPorSemana > 0) {
+            LinearLayout metaLine = new LinearLayout(requireContext());
+            metaLine.setOrientation(LinearLayout.HORIZONTAL);
+            metaLine.setPadding(0, 14, 0, 0);
+
+            if (repeticiones > 0) {
+                TextView tvReps = new TextView(requireContext());
+                tvReps.setText(repeticiones + " reps");
+                tvReps.setTextColor(Color.parseColor("#AAAAAA"));
+                tvReps.setTextSize(11);
+                tvReps.setPadding(0, 0, 20, 0);
+                metaLine.addView(tvReps);
+            }
+
+            if (vecesPorSemana > 0) {
+                TextView tvVeces = new TextView(requireContext());
+                tvVeces.setText(vecesPorSemana + "x/semana");
+                tvVeces.setTextColor(Color.parseColor("#AAAAAA"));
+                tvVeces.setTextSize(11);
+                metaLine.addView(tvVeces);
+            }
+
+            content.addView(metaLine);
+        }
+
+        // Boton
+        com.google.android.material.button.MaterialButton btnEntrenar = new com.google.android.material.button.MaterialButton(requireContext());
+        btnEntrenar.setText("Empezar rutina");
         btnEntrenar.setTextColor(Color.BLACK);
-        btnEntrenar.setPadding(0, 20, 0, 20);
+        btnEntrenar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#84F527")));
+        btnEntrenar.setCornerRadius(100);
+        btnEntrenar.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.barlow_bold));
+        btnEntrenar.setTextSize(14);
+        btnEntrenar.setLetterSpacing(0.05f);
+
+        LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        btnParams.topMargin = 20;
+        btnEntrenar.setLayoutParams(btnParams);
+
         btnEntrenar.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), EntrenamientoActivity.class);
             intent.putExtra("rutinaUsuarioId", rutinaUsuarioId);
             entrenamientoLauncher.launch(intent);
         });
-        card.addView(btnEntrenar);
+
+        content.addView(btnEntrenar);
+        card.addView(content);
 
         return card;
     }
