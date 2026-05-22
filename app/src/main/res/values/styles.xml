@@ -11,4 +11,8 @@
         <item name="android:backgroundTint">@color/cardBackground</item>
     </style>
 
+    <style name="NoActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
 </resources>

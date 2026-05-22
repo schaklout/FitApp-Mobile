@@ -50,6 +50,7 @@
         android:elevation="8dp"
         app:itemIconTint="@color/nav_icon_color"
         app:itemTextColor="@color/nav_icon_color"
+        app:itemActiveIndicatorStyle="@style/NoActiveIndicator"
         app:itemPaddingTop="8dp"
         app:itemPaddingBottom="4dp"
         app:menu="@menu/bottom_nav_menu"
