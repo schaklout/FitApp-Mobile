@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Trofeo -->
+    <path
+        android:fillColor="#84F527"
+        android:pathData="M7,2 L7,4 L5,4 C3.9,4 3,4.9 3,6 L3,7 C3,9.2 4.8,11 7,11 L7,12 C7,14.2 8.5,16 10.5,16.6 L10.5,20 L7,20 L7,22 L17,22 L17,20 L13.5,20 L13.5,16.6 C15.5,16 17,14.2 17,12 L17,11 C19.2,11 21,9.2 21,7 L21,6 C21,4.9 20.1,4 19,4 L17,4 L17,2 Z" />
+    <!-- Asas -->
+    <path
+        android:fillColor="#84F527"
+        android:pathData="M5,6 L7,6 L7,9 L5,9 C4.4,9 4,8.1 4,7.5 C4,6.9 4.4,6 5,6 Z" />
+    <path
+        android:fillColor="#84F527"
+        android:pathData="M19,6 L17,6 L17,9 L19,9 C19.6,9 20,8.1 20,7.5 C20,6.9 19.6,6 19,6 Z" />
+    <!-- Estrella en el centro -->
+    <path
+        android:fillColor="#0B0B0B"
+        android:pathData="M12,8 L12.7,10.3 L13,10 L14,11 L12,10 L10,11 L11,10 L11.3,8 Z" />
+</vector>
