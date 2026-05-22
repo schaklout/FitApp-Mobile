@@ -33,6 +33,7 @@ public class TokenManager {
     private static final String TOKEN_KEY = "token";
     private static final String PREF_NAME = "user_prefs";
     private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_ONBOARDING_COMPLETED = "onboarding_completed";
 
 
 
@@ -102,6 +103,18 @@ public class TokenManager {
     public static String getUserAltura(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(USER_ALTURA, "");
+    }
+
+    public static boolean isOnboardingCompleted(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false);
+    }
+
+    public static void setOnboardingCompleted(Context context, boolean completed) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(KEY_ONBOARDING_COMPLETED, completed);
+        editor.apply();
     }
 }
 

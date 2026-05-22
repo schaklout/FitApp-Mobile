@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!TokenManager.isOnboardingCompleted(this)) {
+            startActivity(new Intent(this, OnboardingActivity.class));
+            finish();
+            return;
+        }
+
         InsetsHelper.enable(this);
         setContentView(R.layout.activity_main);
         InsetsHelper.padBoth(findViewById(R.id.mainRoot));
