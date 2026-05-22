@@ -301,11 +301,9 @@ public class EntrenamientoActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         runOnUiThread(() -> {
                             if (response.isSuccessful()) {
-                                Toast.makeText(EntrenamientoActivity.this,
-                                        "Entrenamiento completado: " + minutos + " minutos",
-                                        Toast.LENGTH_SHORT).show();
                                 setResult(RESULT_OK);
-                                finish();
+                                new CelebrationDialog().show(getSupportFragmentManager(), "celebration");
+                                new android.os.Handler().postDelayed(() -> finish(), 2500);
                             } else {
                                 Toast.makeText(EntrenamientoActivity.this,
                                         "Error API: " + response.code(),

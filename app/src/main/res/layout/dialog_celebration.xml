@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DD000000"
+    android:clickable="true">
+
+    <com.example.proyectofinal.AnimatedBorderView
+        android:id="@+id/animatedBorder"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_bottom_nav_pill"
+            android:padding="36dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENTRENAMIENTO"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COMPLETADO"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:id="@+id/tvAdjetivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡BESTIA!"
+                android:textColor="@color/green"
+                android:textSize="42sp"
+                android:fontFamily="@font/bebas_neue"
+                android:letterSpacing="0.06"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Has completado tu rutina.&#xa;Sigue así, cada día más fuerte."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:fontFamily="@font/barlow"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.3" />
+
+            <TextView
+                android:id="@+id/btnCerrarCelebracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="CONTINUAR"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.06"
+                android:background="@drawable/btn_primary_bg"
+                android:gravity="center"
+                android:paddingHorizontal="48dp"
+                android:paddingVertical="14dp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </com.example.proyectofinal.AnimatedBorderView>
+</FrameLayout>
