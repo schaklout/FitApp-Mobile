@@ -62,8 +62,6 @@ public class ProgresoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        InsetsHelper.padTop(view.findViewById(R.id.tvTituloProgreso));
-
         lineChart = view.findViewById(R.id.lineChartCalorias);
         tvResumen = view.findViewById(R.id.tvResumenProgreso);
         spinnerRango = view.findViewById(R.id.spinnerRango);

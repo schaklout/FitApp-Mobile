@@ -59,8 +59,6 @@ public class RutinasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        InsetsHelper.padTop(view.findViewById(R.id.rutinasScroll));
-
         linearRutinasDelDia = view.findViewById(R.id.linearRutinasActivas);
         tvNoRutinas = view.findViewById(R.id.tvNoRutinasActivas);
 

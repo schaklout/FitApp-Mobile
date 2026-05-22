@@ -47,8 +47,6 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        InsetsHelper.padTop(view.findViewById(R.id.dashboardScroll));
-
         tvCalorias = view.findViewById(R.id.tvCalorias);
         tvPesoActual = view.findViewById(R.id.tvPesoActual);
         tvRutinas = view.findViewById(R.id.tvRutinas);

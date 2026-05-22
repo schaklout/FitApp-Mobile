@@ -23,6 +23,7 @@ public class MainContainerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         InsetsHelper.enable(this);
         setContentView(R.layout.activity_container);
+        InsetsHelper.padTop(findViewById(R.id.appHeader));
         InsetsHelper.liftBottomNav(findViewById(R.id.bottom_navigation));
 
         bottomNav = findViewById(R.id.bottom_navigation);

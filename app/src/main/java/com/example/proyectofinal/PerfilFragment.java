@@ -47,8 +47,6 @@ public class PerfilFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        InsetsHelper.padTop(view.findViewById(R.id.perfilScroll));
-
         saludoText = view.findViewById(R.id.saludoText);
         usernameText = view.findViewById(R.id.usernameText);
         miembroDesdeText = view.findViewById(R.id.miembroDesdeText);
