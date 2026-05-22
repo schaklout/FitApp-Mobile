@@ -2,6 +2,7 @@ package com.example.proyectofinal;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -216,13 +217,36 @@ public class EntrenamientoActivity extends AppCompatActivity {
                                     e.optInt("sets", 0) + " sets, descanso " +
                                     e.optInt("descanso", 0) + "s";
 
+                    LinearLayout row = new LinearLayout(this);
+                    row.setOrientation(LinearLayout.HORIZONTAL);
+                    row.setPadding(12, 10, 12, 10);
+                    row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+
+                    TextView num = new TextView(this);
+                    num.setText(String.valueOf(i + 1));
+                    num.setTextColor(Color.parseColor("#84F527"));
+                    num.setTextSize(14);
+                    num.setTypeface(Typeface.DEFAULT_BOLD);
+                    num.setPadding(0, 0, 12, 0);
+
                     TextView tv = new TextView(this);
                     tv.setText(texto);
-                    tv.setTextColor(Color.WHITE);
-                    tv.setTextSize(16);
-                    tv.setPadding(0, 8, 0, 8);
+                    tv.setTextColor(Color.parseColor("#CCCCCC"));
+                    tv.setTextSize(13);
 
-                    linearEjercicios.addView(tv);
+                    row.addView(num);
+                    row.addView(tv);
+
+                    if (i < ejercicios.length() - 1) {
+                        row.setBackgroundColor(Color.parseColor("#0D0D0D"));
+                        View sep = new View(this);
+                        sep.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                        sep.setBackgroundColor(Color.parseColor("#1A1A1A"));
+                        linearEjercicios.addView(sep);
+                    }
+
+                    linearEjercicios.addView(row);
                 }
             }
 

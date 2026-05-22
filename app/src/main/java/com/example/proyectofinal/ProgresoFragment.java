@@ -106,7 +106,7 @@ public class ProgresoFragment extends Fragment {
         legend.setForm(Legend.LegendForm.LINE);
 
         XAxis xAxis = chart.getXAxis();
-        xAxis.setTextColor(Color.parseColor("#666666"));
+        xAxis.setTextColor(Color.parseColor("#AAAAAA"));
         xAxis.setTextSize(10f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -115,7 +115,7 @@ public class ProgresoFragment extends Fragment {
         xAxis.setGranularity(1f);
 
         YAxis yLeft = chart.getAxisLeft();
-        yLeft.setTextColor(Color.parseColor("#666666"));
+        yLeft.setTextColor(Color.parseColor("#AAAAAA"));
         yLeft.setTextSize(10f);
         yLeft.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.barlow));
         yLeft.setDrawGridLines(true);
