@@ -6,7 +6,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -27,9 +26,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private int userId;
     private static final String BASE_URL_API = "https://iatic.es/ifc302/g1/fitapp/api.php/";
 
-    private static final String BASE_URL =
-            "https://iatic.es/ifc302/g1/fitapp/api.php/usuarios/";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +34,7 @@ public class EditProfileActivity extends AppCompatActivity {
         InsetsHelper.padTop(findViewById(R.id.toolbar));
         InsetsHelper.padBoth(findViewById(R.id.editContentLayout));
 
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
         etNombre = findViewById(R.id.etNombre);
         etPeso = findViewById(R.id.etPeso);

@@ -1,116 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/darkBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
-    <!-- Toolbar con flecha -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkBackground"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Editar perfil"
-        app:titleTextColor="@color/greenAccent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        android:padding="8dp" />
-
-    <!-- Contenido principal -->
     <LinearLayout
         android:id="@+id/editContentLayout"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="32dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!-- Card -->
+        <!-- Header -->
         <LinearLayout
-            android:orientation="vertical"
-            android:background="@drawable/bg_card"
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Nombre -->
-            <TextView
-                android:text="Nombre"
-                android:textColor="@color/textGray"
-                android:textSize="13sp"
-                android:layout_marginBottom="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/etNombre"
-                android:hint="Tu nombre"
-                android:textColor="#FFFFFF"
-                android:textColorHint="@color/textGray"
-                android:background="@drawable/bg_input"
-                android:padding="12dp"
-                android:inputType="textPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Peso -->
-            <TextView
-                android:text="Peso (kg)"
-                android:textColor="@color/textGray"
-                android:textSize="13sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/etPeso"
-                android:hint="Ej: 70"
-                android:textColor="#FFFFFF"
-                android:textColorHint="@color/textGray"
-                android:background="@drawable/bg_input"
-                android:padding="12dp"
-                android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <!-- Altura -->
-            <TextView
-                android:text="Altura (cm)"
-                android:textColor="@color/textGray"
-                android:textSize="13sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/etAltura"
-                android:hint="Ej: 175"
-                android:textColor="#FFFFFF"
-                android:textColorHint="@color/textGray"
-                android:background="@drawable/bg_input"
-                android:padding="12dp"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <!-- Botón guardar -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGuardar"
-            android:text="Guardar cambios"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/greenAccent"
-            android:layout_marginTop="24dp"
-            android:padding="14dp"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="16dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_arrow_back"
+                android:scaleType="centerInside"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Editar perfil"
+                android:textColor="@color/text_primary"
+                android:textSize="22sp"
+                android:fontFamily="@font/bebas_neue"
+                android:letterSpacing="0.04" />
+        </LinearLayout>
+
+        <!-- Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#3384F527"
+            app:strokeWidth="1.5dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Nombre -->
+                <TextView
+                    android:text="Nombre"
+                    android:textColor="@color/text_muted"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxBackgroundColor="@color/surface_2"
+                    app:boxStrokeColor="#3384F527"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1.5dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:hintTextColor="@color/text_secondary"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="Tu nombre"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_secondary"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/barlow" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Peso -->
+                <TextView
+                    android:text="Peso (kg)"
+                    android:textColor="@color/text_muted"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:boxBackgroundColor="@color/surface_2"
+                    app:boxStrokeColor="#3384F527"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1.5dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:hintTextColor="@color/text_secondary"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPeso"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="Ej: 70"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_secondary"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/barlow" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Altura -->
+                <TextView
+                    android:text="Altura (cm)"
+                    android:textColor="@color/text_muted"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/surface_2"
+                    app:boxStrokeColor="#3384F527"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1.5dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:hintTextColor="@color/text_secondary"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAltura"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="Ej: 175"
+                        android:inputType="number"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_secondary"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/barlow" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Guardar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Guardar cambios"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:fontFamily="@font/barlow_bold"
+            android:letterSpacing="0.04"
+            android:textAllCaps="true"
+            app:backgroundTint="@color/green"
             app:cornerRadius="@dimen/radius_pill" />
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
