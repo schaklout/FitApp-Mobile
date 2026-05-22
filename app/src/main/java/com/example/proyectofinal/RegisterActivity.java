@@ -23,7 +23,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        InsetsHelper.enable(this);
         setContentView(R.layout.activity_register);
+        InsetsHelper.padBoth(findViewById(R.id.registerRoot));
 
         nombreEditText = findViewById(R.id.nombreEditText);
         emailEditText = findViewById(R.id.emailEditText);

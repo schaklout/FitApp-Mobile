@@ -23,10 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".RutinasActivity" />
-        <activity android:name=".ProgresoActivity" />
-        <activity android:name=".PerfilActivity" />
+        <activity android:name=".MainContainerActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".EntrenamientoActivity" />
         <activity android:name=".EditProfileActivity" />
