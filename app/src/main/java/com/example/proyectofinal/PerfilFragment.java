@@ -128,6 +128,15 @@ public class PerfilFragment extends Fragment {
         rutinasFinalizadasText.setText("0");
     }
 
+    private String nivelFromRolId(int rolId) {
+        switch (rolId) {
+            case 1: return "ADMIN";
+            case 2: return "ENTRENADOR";
+            case 3: return "USUARIO";
+            default: return "INTERMEDIO";
+        }
+    }
+
     private void mostrarDatosUsuario(@NonNull JSONObject usuario) {
         String nombre = usuario.optString("nombre", "Usuario");
         String email = usuario.optString("email", "-");
@@ -136,15 +145,14 @@ public class PerfilFragment extends Fragment {
         saludoText.setText(nombre);
         usernameText.setText(email);
         miembroDesdeText.setText("Miembro desde " + fecha.substring(0, 10));
-        nivelText.setText(usuario.optString("nivel", "Intermedio").toUpperCase());
+        nivelText.setText(nivelFromRolId(usuario.optInt("nivel", 0)));
 
         pesoText.setText(usuario.optString("peso", "0"));
         alturaText.setText(usuario.optString("altura", "0"));
-        caloriasText.setText(String.valueOf(usuario.optInt("calorias_totales", 0)));
     }
 
     private void cargarCalorias(String token) {
-        String url = "https://iatic.es/ifc302/g1/fitapp/api.php/dashboard";
+        String url = "https://iatic.es/ifc302/g1/fitappv2/api.php/dashboard";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> caloriasText.setText(String.valueOf(response.optInt("calorias_quemadas", 0))),

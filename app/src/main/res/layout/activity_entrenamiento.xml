@@ -77,7 +77,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="220dp"
+                android:background="#F3F0EE">
 
                 <ImageView
                     android:id="@+id/ivImagenEntrenamiento"

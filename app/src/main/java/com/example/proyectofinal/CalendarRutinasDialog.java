@@ -95,52 +95,20 @@ public class CalendarRutinasDialog {
                 try {
                     JSONArray rutinasArray = new JSONArray(response.body().string());
 
-                    // Obtener mes/año actual
-                    Calendar ahora = Calendar.getInstance();
-                    int mesActual = ahora.get(Calendar.MONTH); // 0-based
-                    int anoActual = ahora.get(Calendar.YEAR);
-
-                    // Por cada rutina, calcular todos los días del mes donde se ejecuta
                     for (int i = 0; i < rutinasArray.length(); i++) {
                         JSONObject rutina = rutinasArray.getJSONObject(i);
-                        String diasSemanaStr = rutina.optString("dias_semana", "");
+                        String fecha = rutina.optString("fecha_asignacion", "");
+                        if (fecha.isEmpty()) continue;
 
-                        if (!diasSemanaStr.isEmpty()) {
-                            // dias_semana es "0,2,5" (0=Lun, 1=Mar, etc)
-                            String[] diasArray = diasSemanaStr.split(",");
-                            Set<Integer> diasAsignados = new HashSet<>();
-
-                            for (String diaStr : diasArray) {
-                                try {
-                                    int dia = Integer.parseInt(diaStr.trim());
-                                    diasAsignados.add(dia); // 0=Lun, 1=Mar, ..., 6=Dom
-                                } catch (NumberFormatException e) {
-                                    // ignorar
-                                }
-                            }
-
-                            // Recorrer todos los días del mes y marcar los que coinciden
-                            Calendar cal = Calendar.getInstance();
-                            cal.set(anoActual, mesActual, 1);
-                            int diasEnMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-                            for (int dia = 1; dia <= diasEnMes; dia++) {
-                                cal.set(anoActual, mesActual, dia);
-
-                                // Convertir Calendar.DAY_OF_WEEK a índice 0-6 (0=Lun)
-                                int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-                                int indiceDia = (dayOfWeek + 5) % 7; // Convertir a 0=Lun...6=Dom
-
-                                // Si este día de la semana está asignado, agregarlo
-                                if (diasAsignados.contains(indiceDia)) {
-                                    CalendarDay cd = CalendarDay.from(anoActual, mesActual + 1, dia);
-                                    diasConRutinas.add(cd);
-                                }
-                            }
-                        }
+                        try {
+                            String[] parts = fecha.split("-");
+                            int year = Integer.parseInt(parts[0]);
+                            int month = Integer.parseInt(parts[1]);
+                            int day = Integer.parseInt(parts[2]);
+                            diasConRutinas.add(CalendarDay.from(year, month, day));
+                        } catch (Exception ignored) {}
                     }
 
-                    // Aplicar decorador en el hilo UI
                     ((android.app.Activity) context).runOnUiThread(() -> {
                         if (!diasConRutinas.isEmpty()) {
                             calendarView.addDecorator(new CircleDecorator(diasConRutinas, context, R.drawable.circle_yellow));
@@ -177,10 +145,6 @@ public class CalendarRutinasDialog {
                         for (int i = 0; i < arr.length(); i++) {
                             JSONObject r = arr.getJSONObject(i);
                             sb.append("• ").append(r.optString("nombre", ""));
-                            int reps = r.optInt("repeticiones", 0);
-                            if (reps > 0) sb.append(" (").append(reps).append(" reps)");
-                            int veces = r.optInt("veces_por_semana", 0);
-                            if (veces > 0) sb.append(" [").append(veces).append("x/sem]");
                             sb.append("\n");
                         }
                     }

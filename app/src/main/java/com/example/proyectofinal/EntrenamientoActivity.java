@@ -176,7 +176,7 @@ public class EntrenamientoActivity extends AppCompatActivity {
 
             if (!videoUrl.isEmpty()) {
                 if (!videoUrl.startsWith("http")) {
-                    videoUrl = "https://iatic.es/ifc302/g1/fitapp/public/" + videoUrl;
+                    videoUrl = "https://iatic.es/ifc302/g1/fitappv2/public/" + videoUrl;
                 }
 
                 progressLoader.setVisibility(View.VISIBLE);
@@ -248,6 +248,13 @@ public class EntrenamientoActivity extends AppCompatActivity {
 
                     linearEjercicios.addView(row);
                 }
+            } else {
+                TextView tvNombre = new TextView(this);
+                tvNombre.setText(rutina.optString("nombre", "Sin título"));
+                tvNombre.setTextColor(Color.parseColor("#84F527"));
+                tvNombre.setTextSize(15);
+                tvNombre.setTypeface(Typeface.DEFAULT_BOLD);
+                linearEjercicios.addView(tvNombre);
             }
 
         } catch (Exception e) {
@@ -259,7 +266,7 @@ public class EntrenamientoActivity extends AppCompatActivity {
 
     private void cargarImagen(String imagenUrl) {
         if (!imagenUrl.isEmpty() && !imagenUrl.startsWith("http")) {
-            imagenUrl = "https://iatic.es/ifc302/g1/fitapp/public/" + imagenUrl;
+            imagenUrl = "https://iatic.es/ifc302/g1/fitappv2/public/" + imagenUrl;
         }
 
         progressLoader.setVisibility(View.VISIBLE);
@@ -275,18 +282,9 @@ public class EntrenamientoActivity extends AppCompatActivity {
     }
 
     private void finalizarEntrenamiento() {
-        // Obtener tiempo de entrenamiento en minutos
-        long segundos = detenerCronometro();
+        detenerCronometro();
 
-        final int minutos = Math.max(1, (int) (segundos / 60)); // final + Math.max evita reasignación
-
-        // Mostrar diálogo para completar información (opcional)
-
-        // Mostrar diálogo para completar información (opcional)
-        int calorias = 0; // podría preguntar al usuario
-        String notas = ""; // podría capturar notas
-
-        ApiService.guardarSesionEntrenamiento(this, rutinaUsuarioId, minutos, calorias, notas,
+        ApiService.finalizarRutina(this, rutinaUsuarioId,
                 new Callback() {
                     @Override
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
