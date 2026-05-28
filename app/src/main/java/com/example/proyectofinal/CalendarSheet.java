@@ -105,33 +105,19 @@ public class CalendarSheet extends BottomSheetDialogFragment {
                 if (!response.isSuccessful() || response.body() == null) return;
                 try {
                     JSONArray rutinasArray = new JSONArray(response.body().string());
-                    Calendar ahora = Calendar.getInstance();
-                    int mesActual = ahora.get(Calendar.MONTH);
-                    int anoActual = ahora.get(Calendar.YEAR);
 
                     for (int i = 0; i < rutinasArray.length(); i++) {
                         JSONObject rutina = rutinasArray.getJSONObject(i);
-                        String diasSemanaStr = rutina.optString("dias_semana", "");
-                        if (diasSemanaStr.isEmpty()) continue;
+                        String fecha = rutina.optString("fecha_asignacion", "");
+                        if (fecha.isEmpty()) continue;
 
-                        String[] diasArray = diasSemanaStr.split(",");
-                        Set<Integer> diasAsignados = new HashSet<>();
-                        for (String diaStr : diasArray) {
-                            try { diasAsignados.add(Integer.parseInt(diaStr.trim())); }
-                            catch (NumberFormatException ignored) {}
-                        }
-
-                        Calendar cal = Calendar.getInstance();
-                        cal.set(anoActual, mesActual, 1);
-                        int diasEnMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-                        for (int dia = 1; dia <= diasEnMes; dia++) {
-                            cal.set(anoActual, mesActual, dia);
-                            int indiceDia = (cal.get(Calendar.DAY_OF_WEEK) + 5) % 7;
-                            if (diasAsignados.contains(indiceDia)) {
-                                diasConRutinas.add(CalendarDay.from(anoActual, mesActual + 1, dia));
-                            }
-                        }
+                        try {
+                            String[] parts = fecha.split("-");
+                            int year = Integer.parseInt(parts[0]);
+                            int month = Integer.parseInt(parts[1]);
+                            int day = Integer.parseInt(parts[2]);
+                            diasConRutinas.add(CalendarDay.from(year, month, day));
+                        } catch (Exception ignored) {}
                     }
 
                     requireActivity().runOnUiThread(() -> {
@@ -165,8 +151,6 @@ public class CalendarSheet extends BottomSheetDialogFragment {
                         for (int i = 0; i < arr.length(); i++) {
                             JSONObject r = arr.getJSONObject(i);
                             sb.append("• ").append(r.optString("nombre", "Rutina"));
-                            int reps = r.optInt("repeticiones", 0);
-                            if (reps > 0) sb.append("  —  ").append(reps).append(" reps");
                             sb.append("\n");
                         }
                     }

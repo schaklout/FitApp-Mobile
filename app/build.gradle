@@ -24,7 +24,7 @@ android {
         
         // Definir el campo BASE_URL para Java usando el valor de local.properties
         // Si no existe, usamos una por defecto para evitar errores de compilación
-        def apiUrl = localProperties.getProperty('API_BASE_URL') ?: '"https://iatic.es/ifc302/g1/fitapp/api.php"'
+        def apiUrl = localProperties.getProperty('API_BASE_URL') ?: '"https://iatic.es/ifc302/g1/fitappv2/api.php"'
         buildConfigField "String", "BASE_URL", apiUrl
     }
 

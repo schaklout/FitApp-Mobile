@@ -89,6 +89,18 @@ public class ApiClient {
     }
 
 
+    public static void patch(String endpoint, String json, @Nullable String token, Callback callback) {
+        RequestBody body = RequestBody.create(json, JSON);
+        Request.Builder builder = new Request.Builder()
+                .url(buildUrl(endpoint))
+                .patch(body);
+        if (token != null) {
+            builder.addHeader("Authorization", "Bearer " + token);
+        }
+        Request request = builder.build();
+        client.newCall(request).enqueue(callback);
+    }
+
     public static void delete(String endpoint, @Nullable String json, @Nullable String token, Callback callback) {
 
         Request.Builder builder;

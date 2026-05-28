@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         runOnUiThread(() ->
-                                Toast.makeText(MainActivity.this, "Error login: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                                Toast.makeText(MainActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show()
                         );
                     }
 
@@ -71,55 +71,47 @@ public class MainActivity extends AppCompatActivity {
                         String bodyString = "";
                         try {
                             bodyString = response.body().string();
-                        }catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
                             runOnUiThread(() ->
-                                    Toast.makeText(MainActivity.this, "Excepción: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                                    Toast.makeText(MainActivity.this, "Error al procesar respuesta", Toast.LENGTH_SHORT).show()
                             );
+                            return;
                         }
                         try {
-
                             JSONObject jsonObject = new JSONObject(bodyString);
-                            final String body=bodyString;
+
+                            if (jsonObject.has("error")) {
+                                runOnUiThread(() ->
+                                        Toast.makeText(MainActivity.this, jsonObject.optString("error", "Error desconocido"), Toast.LENGTH_SHORT).show()
+                                );
+                                return;
+                            }
 
                             String token = jsonObject.getString("token");
-
                             JSONObject user = jsonObject.getJSONObject("user");
                             String user_id = user.getString("id");
                             String nombre = user.getString("nombre");
                             String email = user.getString("email");
-
-
                             String pesoObj = user.getString("peso");
                             String alturaObj = user.getString("altura");
 
-                            if(token!="") {
-                                TokenManager.saveToken(MainActivity.this, token);
-                                TokenManager.saveUsuario(MainActivity.this,user_id,nombre,pesoObj,alturaObj,email);
-                                runOnUiThread(() -> {
+                            TokenManager.saveToken(MainActivity.this, token);
+                            TokenManager.saveUsuario(MainActivity.this, user_id, nombre, pesoObj, alturaObj, email);
 
-                                    Toast.makeText(MainActivity.this, "Login OK:\n" + body, Toast.LENGTH_LONG).show();
-
-                                    String token2 = TokenManager.getToken(MainActivity.this);
-                                    Toast.makeText(MainActivity.this, "Token guardado:\n" + token2, Toast.LENGTH_LONG).show();
-
-                                    Intent intent = new Intent(MainActivity.this, MainContainerActivity.class);
-                                    startActivity(intent);
-                                });
-                            }else {
-
-                                Toast.makeText(MainActivity.this, "Login KO:\n" + bodyString, Toast.LENGTH_LONG).show();
-                            }
+                            runOnUiThread(() -> {
+                                Intent intent = new Intent(MainActivity.this, MainContainerActivity.class);
+                                startActivity(intent);
+                                finish();
+                            });
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
-                        }finally {
+                            runOnUiThread(() ->
+                                    Toast.makeText(MainActivity.this, "Error al procesar respuesta", Toast.LENGTH_SHORT).show()
+                            );
+                        } finally {
                             response.close();
                         }
                     }
-
-
-
                 });
             }
         });

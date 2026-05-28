@@ -86,10 +86,9 @@ public class RutinasFragment extends Fragment {
     }
 
     private void cargarRutinas() {
-        int dow = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int dia = (dow + 5) % 7;
+        String hoy = java.time.LocalDate.now().toString();
 
-        ApiService.getRutinasPorDia(requireActivity(), dia, new Callback() {
+        ApiService.getRutinas(requireActivity(), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 requireActivity().runOnUiThread(() ->
@@ -110,16 +109,20 @@ public class RutinasFragment extends Fragment {
                             for (int i = 0; i < rutinasArray.length(); i++) {
                                 try {
                                     JSONObject rutina = rutinasArray.getJSONObject(i);
+                                    String fechaAsignacion = rutina.optString("fecha_asignacion", "");
+
+                                    // Filtrar solo rutinas de hoy
+                                    if (!fechaAsignacion.isEmpty() && !fechaAsignacion.startsWith(hoy)) {
+                                        continue;
+                                    }
+
                                     String nombre = rutina.getString("nombre");
                                     String descripcion = rutina.optString("descripcion", "Sin descripción");
                                     String nivel = rutina.optString("nivel", "Nivel no especificado");
                                     int rutinaUsuarioId = rutina.optInt("rutina_usuario_id", rutina.optInt("id", -1));
-                                    int repeticiones = rutina.optInt("repeticiones", 0);
-                                    int vecesPorSemana = rutina.optInt("veces_por_semana", 0);
-                                    int diaSemana = rutina.optInt("dia_semana", -1);
 
                                     View card = crearCardRutina(nombre, descripcion, nivel, rutinaUsuarioId,
-                                            repeticiones, vecesPorSemana, diaSemana);
+                                            0, 0, -1);
                                     linearRutinasDelDia.addView(card);
                                     hayRutinas = true;
                                 } catch (JSONException e) {

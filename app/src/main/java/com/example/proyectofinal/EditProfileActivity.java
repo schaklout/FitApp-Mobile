@@ -24,7 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private String token;
     private int userId;
-    private static final String BASE_URL_API = "https://iatic.es/ifc302/g1/fitapp/api.php/";
+    private static final String BASE_URL_API = "https://iatic.es/ifc302/g1/fitappv2/api.php/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
